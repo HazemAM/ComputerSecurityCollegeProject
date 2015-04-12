@@ -5,15 +5,16 @@ namespace ComputerSecurity
 {
 	public static class Vigenere
 	{
-		public static string encrypt(string text, string key, VigenereType type)
+		public static string encrypt(string text, string key)
 		{
 			Dictionary<KeyValuePair<char,char>,char> map = new Dictionary<KeyValuePair<char,char>,char>();
 
 			text = text.ToUpper();
 			key = key.ToUpper();
-
-			key = formulateKey(text, key, type);
 			map = formulateMap();
+
+			if(key.Length != text.Length)
+				throw new ArgumentException("Key must have length equal to the text to encrypt (use formulateKey method)");
 
 			/**
 			 * Encryption
@@ -29,15 +30,16 @@ namespace ComputerSecurity
 			return encrypted;
 		}
 
-		public static string decrypt(string text, string key, VigenereType type)
+		public static string decrypt(string text, string key)
 		{
 			Dictionary<KeyValuePair<char,char>,char> map = new Dictionary<KeyValuePair<char,char>,char>();
 
 			text = text.ToUpper();
 			key = key.ToUpper();
-
-			key = formulateKey(text, key, type);
 			map = formulateMap();
+
+			if(key.Length != text.Length)
+				throw new ArgumentException("Key must have length equal to the text to decrypt (use formulateKey method)");
 
 			/**
 			 * Decryption
@@ -60,7 +62,7 @@ namespace ComputerSecurity
 			return decrypted;
 		}
 
-		private static string formulateKey(string text, string initKey, VigenereType type)
+		public static string formulateKey(string text, string initKey, VigenereType type)
 		{
 			string key = initKey;
 

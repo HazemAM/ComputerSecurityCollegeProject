@@ -14,8 +14,9 @@ namespace ComputerSecurity
 			enc = Playfair.encrypt("Hazem", "playfairexample");
 			dec = Playfair.decrypt(enc, "playfairexample");
 
-			enc = Vigenere.encrypt("Hazem-Hamdy", "hello", VigenereType.REPEATING_KEY);
-			dec = Vigenere.decrypt(enc, "hello", VigenereType.REPEATING_KEY);
+			string key = Vigenere.formulateKey("Haz-em", "bla", VigenereType.AUTO_KEY);
+			enc = Vigenere.encrypt("Haz-em", key);
+			dec = Vigenere.decrypt(enc, key);
 		}
 	}
 }
