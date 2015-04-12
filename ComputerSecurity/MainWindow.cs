@@ -10,6 +10,9 @@ namespace ComputerSecurity
 			InitializeComponent();
 			string enc = Ceasar.encrypt("Hazem", 3);
 			string dec = Ceasar.decrypt(enc, 3);
+			
+			enc = Playfair.encrypt("Hazem", "playfairexample");
+			dec = Playfair.decrypt("DFVMIM", "playfairexample");
 		}
 	}
 }
