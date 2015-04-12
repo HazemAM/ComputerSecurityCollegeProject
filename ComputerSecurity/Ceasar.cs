@@ -10,8 +10,8 @@ namespace ComputerSecurity
 			text = text.ToUpper();
 
 			int newIndex;
-			for(int i=0; i<text.Length; i++){
-				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) + key), 26);
+			for(int i=0; i < text.Length; i++){
+				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) + key), Helpers.alphabet.Length);
 				encrypted += Helpers.alphabet[newIndex];
 			}
 
@@ -24,8 +24,8 @@ namespace ComputerSecurity
 			text = text.ToUpper();
 
 			int newIndex;
-			for(int i=0; i<text.Length; i++){
-				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) - key), 26);
+			for(int i=0; i < text.Length; i++){
+				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) - key), Helpers.alphabet.Length);
 				decrypted += Helpers.alphabet[newIndex];
 			}
 

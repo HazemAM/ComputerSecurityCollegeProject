@@ -8,11 +8,11 @@ namespace ComputerSecurity
 		public MainWindow()
 		{
 			InitializeComponent();
-			string enc = Ceasar.encrypt("Hazem", 3);
+			string enc = Ceasar.encrypt("Haz-em", 3);
 			string dec = Ceasar.decrypt(enc, 3);
 			
 			enc = Playfair.encrypt("Hazem", "playfairexample");
-			dec = Playfair.decrypt("DFVMIM", "playfairexample");
+			dec = Playfair.decrypt(enc, "playfairexample");
 		}
 	}
 }
