@@ -11,7 +11,7 @@ namespace ComputerSecurity
 
 			int newIndex;
 			for(int i=0; i<text.Length; i++){
-				newIndex = (Helpers.alphaIndex(text[i]) + key) % 26;
+				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) + key), 26);
 				encrypted += Helpers.alphabet[newIndex];
 			}
 
@@ -25,8 +25,7 @@ namespace ComputerSecurity
 
 			int newIndex;
 			for(int i=0; i<text.Length; i++){
-				newIndex = (Helpers.alphaIndex(text[i]) - key) % 26;
-				if(newIndex < 0) newIndex += 26;
+				newIndex = Helpers.mod( (Helpers.alphaIndex(text[i]) - key), 26);
 				decrypted += Helpers.alphabet[newIndex];
 			}
 
