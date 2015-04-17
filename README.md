@@ -12,5 +12,8 @@ Project for Computer Security college class.
 8. [ ] Columnar.
 
 * * * * *
-9. [ ] Rivest Cipher (RC) 4.
+9. [ ] DES and 3-DES.
+
+* * * * *
+10. [ ] Rivest Cipher (RC) 4.
 11. [ ] MD5.
