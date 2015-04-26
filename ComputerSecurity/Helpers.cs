@@ -34,10 +34,13 @@ namespace ComputerSecurity
 			return Tuple.Create(-1, -1);
 		}
 
+		/// <summary>
+		/// Performs a real mod operation, that never returns a negative number.
+		/// </summary>
 		public static int mod(int num1, int num2)
 		{
 			int result = num1 % num2;
-			if(result < 0) result += num2;
+			while(result < 0) result += num2;
 
 			return result;
 		}
