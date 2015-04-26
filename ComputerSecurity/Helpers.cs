@@ -44,5 +44,15 @@ namespace ComputerSecurity
 
 			return result;
 		}
+
+		/// <summary>
+		/// Swaps two elements in an array of any type.
+		/// </summary>
+		public static void swap<T>(T[] arr, int i, int j)
+		{
+			T temp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = temp;
+		}
 	}
 }
