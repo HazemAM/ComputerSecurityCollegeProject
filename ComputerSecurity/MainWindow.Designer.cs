@@ -42,6 +42,8 @@
 			this.txtCiphertext = new System.Windows.Forms.TextBox();
 			this.btnDecrypt = new System.Windows.Forms.Button();
 			this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+			this.btnServerStart = new System.Windows.Forms.Button();
+			this.label1 = new System.Windows.Forms.Label();
 			this.groupBox1.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -168,11 +170,31 @@
 			this.btnDecrypt.UseVisualStyleBackColor = true;
 			this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
 			// 
+			// btnServerStart
+			// 
+			this.btnServerStart.Location = new System.Drawing.Point(178, 218);
+			this.btnServerStart.Name = "btnServerStart";
+			this.btnServerStart.Size = new System.Drawing.Size(88, 31);
+			this.btnServerStart.TabIndex = 13;
+			this.btnServerStart.Text = "Start Server";
+			this.btnServerStart.UseVisualStyleBackColor = true;
+			this.btnServerStart.Click += new System.EventHandler(this.btnServerStart_Click);
+			// 
+			// label1
+			// 
+			this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+			this.label1.Location = new System.Drawing.Point(55, 202);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(350, 2);
+			this.label1.TabIndex = 20;
+			// 
 			// MainWindow
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(458, 192);
+			this.ClientSize = new System.Drawing.Size(458, 261);
+			this.Controls.Add(this.label1);
+			this.Controls.Add(this.btnServerStart);
 			this.Controls.Add(this.btnDecrypt);
 			this.Controls.Add(this.txtCiphertext);
 			this.Controls.Add(this.btnEncrypt);
@@ -203,6 +225,8 @@
 		private System.Windows.Forms.TextBox txtCiphertext;
 		private System.Windows.Forms.Button btnDecrypt;
 		private System.Windows.Forms.ToolTip toolTip;
+		private System.Windows.Forms.Button btnServerStart;
+		private System.Windows.Forms.Label label1;
 	}
 }
 

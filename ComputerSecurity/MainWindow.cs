@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Net;
+using System.Net.Sockets;
+using System.Text;
 using System.Windows.Forms;
 
 namespace ComputerSecurity
@@ -8,7 +11,10 @@ namespace ComputerSecurity
 		public MainWindow()
 		{
 			InitializeComponent();
+		}
 
+		private void test()
+		{
 			string enc, dec, key, result;
 
 			enc = Ceasar.encrypt("Haz-em", 3);
@@ -25,6 +31,43 @@ namespace ComputerSecurity
 			dec = RC4.decrypt(enc, "ehm");
 
 			result = MD5.getHash("Hazem AbuMostafa").ToLower();
+		}
+
+		private void startServer()
+		{
+			try
+			{
+				//Initializes the listener:
+				TcpListener myList = new TcpListener(IPAddress.Any, 800);
+
+				//Start listeneting at the specified port:
+				myList.Start();
+
+				Console.WriteLine("The server is running at port 800...");
+				Console.WriteLine("The local endpoint is: " + myList.LocalEndpoint);
+				Console.WriteLine("Waiting for a connection...");
+
+				Socket s = myList.AcceptSocket();
+				Console.WriteLine("Connection accepted from: " + s.RemoteEndPoint);
+
+				byte[] b = new byte[100];
+				int k = s.Receive(b);
+				Console.WriteLine("Recieved: ");
+				for(int i=0; i < k; i++)
+					Console.Write(Convert.ToChar(b[i]));
+
+				ASCIIEncoding asen = new ASCIIEncoding();
+				s.Send(asen.GetBytes("Message recieved by the server."));
+				Console.WriteLine("\nAcknowledgement sent to client.");
+				
+				//Closing:
+				s.Close();
+				myList.Stop();
+			}
+			catch(Exception e)
+			{
+				Console.WriteLine("*** Error catched. Couldn't start server. ***" + e.StackTrace);
+			}
 		}
 
 		private void btnEncrypt_Click(object sender, EventArgs e)
@@ -103,6 +146,11 @@ namespace ComputerSecurity
 			//TODO: Check when (key.Length == 0) for algorithms that require that.
 
 			return true;
+		}
+
+		private void btnServerStart_Click(object sender, EventArgs e)
+		{
+			startServer();
 		}
 	}
 }
