@@ -1,4 +1,4 @@
-﻿# Computer Security Project
+# Computer Security Project
 Project for Computer Security college class.
 
 # Goal
@@ -10,3 +10,10 @@ Project for Computer Security college class.
 6. [ ] Hill cipher.
 7. [ ] Rail fence.
 8. [ ] Columnar.
+
+* * * * *
+9. [ ] DES and 3-DES.
+
+* * * * *
+10. [ ] Rivest Cipher (RC) 4.
+11. [ ] MD5.
