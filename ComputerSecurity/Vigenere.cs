@@ -13,7 +13,7 @@ namespace ComputerSecurity
 			key = key.ToUpper();
 			map = formulateMap();
 
-			if(key.Length != text.Length)
+			if(key.Length < text.Length)
 				throw new ArgumentException("Key must have length equal to the text to encrypt (use formulateKey method)");
 
 			/**
@@ -38,7 +38,7 @@ namespace ComputerSecurity
 			key = key.ToUpper();
 			map = formulateMap();
 
-			if(key.Length != text.Length)
+			if(key.Length < text.Length)
 				throw new ArgumentException("Key must have length equal to the text to decrypt (use formulateKey method)");
 
 			/**
