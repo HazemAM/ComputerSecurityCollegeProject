@@ -8,6 +8,8 @@ namespace ComputerSecurity
 {
 	public partial class MainWindow : Form
 	{
+        Socket client;
+
 		public MainWindow()
 		{
 			InitializeComponent();
@@ -35,39 +37,14 @@ namespace ComputerSecurity
 
 		private void startServer()
 		{
-			try
-			{
-				//Initializes the listener:
-				TcpListener myList = new TcpListener(IPAddress.Any, 800);
+            Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, 1100);
+            
+            serverSocket.Bind(endpoint);
+            serverSocket.Listen(1);
 
-				//Start listeneting at the specified port:
-				myList.Start();
-
-				Console.WriteLine("The server is running at port 800...");
-				Console.WriteLine("The local endpoint is: " + myList.LocalEndpoint);
-				Console.WriteLine("Waiting for a connection...");
-
-				Socket s = myList.AcceptSocket();
-				Console.WriteLine("Connection accepted from: " + s.RemoteEndPoint);
-
-				byte[] b = new byte[100];
-				int k = s.Receive(b);
-				Console.WriteLine("Recieved: ");
-				for(int i=0; i < k; i++)
-					Console.Write(Convert.ToChar(b[i]));
-
-				ASCIIEncoding asen = new ASCIIEncoding();
-				s.Send(asen.GetBytes("Message recieved by the server."));
-				Console.WriteLine("\nAcknowledgement sent to client.");
-				
-				//Closing:
-				s.Close();
-				myList.Stop();
-			}
-			catch(Exception e)
-			{
-				Console.WriteLine("*** Error catched. Couldn't start server. ***" + e.StackTrace);
-			}
+            client = serverSocket.Accept();
+            lblServerStatus.Text = "Client connected.";
 		}
 
 		private void btnEncrypt_Click(object sender, EventArgs e)
@@ -150,7 +127,13 @@ namespace ComputerSecurity
 
 		private void btnServerStart_Click(object sender, EventArgs e)
 		{
-			startServer();
+            startServer();
+            btnSend.Enabled = true;
 		}
+
+        private void btnSend_Click(object sender, EventArgs e)
+        {
+            client.Send(Encoding.UTF8.GetBytes(txtCiphertext.Text));
+        }
 	}
 }
