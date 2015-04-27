@@ -15,5 +15,5 @@ Project for Computer Security college class.
 9. [ ] DES and 3-DES.
 
 * * * * *
-10. [ ] Rivest Cipher (RC) 4.
+10. [x] Rivest Cipher (RC) 4.
 11. [ ] MD5.
