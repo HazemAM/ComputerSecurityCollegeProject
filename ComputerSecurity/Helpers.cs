@@ -45,6 +45,14 @@ namespace ComputerSecurity
 			return result;
 		}
 
+		public static double modBig(double num1, double num2)
+		{
+			double result = num1 % num2;
+			while(result < 0) result += num2;
+
+			return result;
+		}
+
 		/// <summary>
 		/// Swaps two elements in an array of any type.
 		/// </summary>
@@ -53,6 +61,16 @@ namespace ComputerSecurity
 			T temp = arr[i];
 			arr[i] = arr[j];
 			arr[j] = temp;
+		}
+
+		public static uint leftRotate(uint x, int c)
+		{
+			return (x << c) | (x >> (32 - c));
+		}
+
+		public static uint reverseByte(uint num)
+		{
+			return (((num & 0x000000ff) << 24) | (num >> 24) | ((num & 0x00ff0000) >> 8) | ((num & 0x0000ff00) << 8));
 		}
 	}
 }

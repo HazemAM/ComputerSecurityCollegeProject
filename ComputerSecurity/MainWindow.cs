@@ -9,7 +9,7 @@ namespace ComputerSecurity
 		{
 			InitializeComponent();
 
-			string enc, dec, key;
+			string enc, dec, key, result;
 
 			enc = Ceasar.encrypt("Haz-em", 3);
 			dec = Ceasar.decrypt(enc, 3);
@@ -23,6 +23,8 @@ namespace ComputerSecurity
 
 			enc = RC4.encrypt("Hazem", "ehm");
 			dec = RC4.decrypt(enc, "ehm");
+
+			result = MD5.getHash("Hazem AbuMostafa").ToLower();
 		}
 	}
 }
