@@ -20,8 +20,15 @@ namespace ComputerSecurity
             clientSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             IPEndPoint endpoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 1100);
             
-            clientSocket.Connect(endpoint);
-            lblClientStatus.Text = "Connected to server.";
+            try{
+                clientSocket.Connect(endpoint);
+
+                lblClientStatus.Text = "Connected to server.";
+                btnListen.Enabled = false;
+                btnReceive.Enabled = true;
+            } catch {
+                MessageBox.Show(this, "No servers found.", "No server", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnEncrypt_Click(object sender, EventArgs e)
@@ -105,7 +112,6 @@ namespace ComputerSecurity
         private void btnListen_Click(object sender, EventArgs e)
         {
             startClient();
-            btnReceive.Enabled = true;
         }
 
         private void btnReceive_Click(object sender, EventArgs e)

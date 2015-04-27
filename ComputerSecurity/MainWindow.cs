@@ -44,7 +44,10 @@ namespace ComputerSecurity
             serverSocket.Listen(1);
 
             client = serverSocket.Accept();
+
             lblServerStatus.Text = "Client connected.";
+            btnServerStart.Enabled = false;
+            btnSend.Enabled = true;
 		}
 
 		private void btnEncrypt_Click(object sender, EventArgs e)
@@ -128,7 +131,6 @@ namespace ComputerSecurity
 		private void btnServerStart_Click(object sender, EventArgs e)
 		{
             startServer();
-            btnSend.Enabled = true;
 		}
 
         private void btnSend_Click(object sender, EventArgs e)

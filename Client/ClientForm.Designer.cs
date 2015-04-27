@@ -62,7 +62,7 @@
             this.btnReceive.Enabled = false;
             this.btnReceive.Location = new System.Drawing.Point(176, 245);
             this.btnReceive.Name = "btnReceive";
-            this.btnReceive.Size = new System.Drawing.Size(101, 22);
+            this.btnReceive.Size = new System.Drawing.Size(101, 23);
             this.btnReceive.TabIndex = 0;
             this.btnReceive.Text = "Receive";
             this.btnReceive.UseVisualStyleBackColor = true;

@@ -204,9 +204,9 @@
             this.btnSend.Enabled = false;
             this.btnSend.Location = new System.Drawing.Point(180, 241);
             this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(98, 21);
+            this.btnSend.Size = new System.Drawing.Size(98, 24);
             this.btnSend.TabIndex = 22;
-            this.btnSend.Text = "Send ciphertext";
+            this.btnSend.Text = "Send";
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
