@@ -16,4 +16,4 @@ Project for Computer Security college class.
 
 * * * * *
 10. [x] Rivest Cipher (RC) 4.
-11. [ ] MD5.
+11. [x] MD5.
