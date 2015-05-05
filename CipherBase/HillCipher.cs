@@ -12,7 +12,7 @@ namespace ComputerSecurity
         string key;
         int[,] Key;
         int[] inp;
-        HillCipher(string input,string key)
+       public HillCipher(string input,string key)
         {
             this.input = input;
             this.key = key;
@@ -56,8 +56,8 @@ namespace ComputerSecurity
                 int res2 = Key[1, 0] * inp[index] + Key[1, 1] * inp[index + 1];
                 res1 = Helpers.mod(res1, 26);
                 res2 = Helpers.mod(res2, 26);
-                res += (char)res1 + 'a';
-                res += (char)res2 + 'a';
+                res += (char)(res1 + 'a');
+                res += (char)(res2 + 'a');
                 index += 2;
             }
             return res;
@@ -74,8 +74,8 @@ namespace ComputerSecurity
                 int res2 = Key[1, 0] * inp[index] + Key[1, 1] * inp[index + 1];
                 res1 = Helpers.mod(res1, 26);
                 res2 = Helpers.mod(res2, 26);
-                res += (char)res1 + 'a';
-                res += (char)res2 + 'a';
+                res += (char)(res1 + 'a');
+                res += (char)(res2 + 'a');
                 index += 2;
             }
             return res;

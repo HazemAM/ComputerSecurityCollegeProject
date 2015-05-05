@@ -9,7 +9,6 @@ namespace ComputerSecurity
 {
     class Des
     {
-        //mode 0 is text mode 1 is hex (hex is the tested one "el mfrood")
         string input;
         string key;
         string cipherText;

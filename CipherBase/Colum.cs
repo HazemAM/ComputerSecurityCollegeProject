@@ -12,7 +12,7 @@ using System.Threading.Tasks;
         int[] n;
         string inp;
         //n 0 based
-        public Colum(int[] n,string inp)
+        public Colum(string inp, int[] n)
         {
             this.n = n;
             this.inp = inp;
@@ -26,14 +26,14 @@ using System.Threading.Tasks;
             int count = 0;
             char[,] re = new char[numRows, numCol];
             for (int i = 0; i < numRows; i++)
-                for (int j = 0; i < numCol; j++)
+                for (int j = 0; j < numCol; j++)
                     if (count < inputsize)
                         re[i, j] = inp[count++];
                     else
                         re[i, j] = 'x';
             for (int i = 0; i < numCol;i++ )
             {
-                int index = n[i];
+                int index = n[i]-1;
                 for (int j = 0; j < numRows; j++)
                     res += re[j, index];
             }
@@ -46,13 +46,13 @@ using System.Threading.Tasks;
             int numRows = inputsize % numCol == 0 ? inputsize / numCol : (inputsize / numCol) + 1;
             char[,] re = new char[numRows, numCol];
             string res = "";
+            int count = 0;
             for (int i = 0; i < numCol;i++ )
             {
-                int index = n[i];
-                index *=numRows;
+                int index = n[i]-1;
                 for(int j=0;j<numRows;j++)
                 {
-                    re[j, i] = inp[index++];
+                    re[j, index] = inp[count++];
                 }
             }
             for (int i = 0; i < numRows; i++)
