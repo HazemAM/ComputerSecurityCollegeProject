@@ -9,34 +9,55 @@ namespace ComputerSecurity
 {
     class Des
     {
+        //mode 0 is text mode 1 is hex (hex is the tested one "el mfrood")
         string input;
         string key;
         string cipherText;
         string plainText;
+        int Mode;
         byte[] inputData;
         byte[] keyData;
-        int[] rotSched = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
+        
         
         int NumRounds = 16;
-        public Des(string key,string input)
+        public Des(string key,string input,int mode)
         {
             this.key = key;
             this.input = input;
+            this.Mode = mode;
             ValidateKey();
         }
-
+        public static byte[] HexToByteArray(string hex)
+        {
+            return Enumerable.Range(0, hex.Length)
+                             .Where(x => x % 2 == 0)
+                             .Select(x => Convert.ToByte(hex.Substring(x, 2), 16))
+                             .ToArray();
+        }
         private void ValidateKey()
         {
-            keyData = Encoding.ASCII.GetBytes(key);
+            if (Mode == 0)
+                keyData = Encoding.ASCII.GetBytes(key);
+            else
+                keyData = HexToByteArray(key);
             if (keyData.Length != 8)
                 throw new Exception("Not a valid key");
-            byte[] inp = Encoding.ASCII.GetBytes(input);
-            if (inp.Length % 8 == 0)
-                inputData = inp;
             else
             {
-                inputData = new byte[(int)(inp.Length / 8) + 1];
-                inp.CopyTo(inputData, 0);
+                byte[] inp;
+                if (Mode == 0)
+                    inp = Encoding.ASCII.GetBytes(input);
+                else
+                    inp = HexToByteArray(input);
+
+
+                if (inp.Length % 8 == 0)
+                    inputData = inp;
+                else
+                {
+                    inputData = new byte[(int)((inp.Length / 8) + 1) * 8];
+                    inp.CopyTo(inputData, 0);
+                }
             }
         }
         public string Encode()
@@ -50,27 +71,27 @@ namespace ComputerSecurity
                 byte[] current=new byte[8];
                 Array.Copy(inputData,index,current,0,8);
                 BitArray Bits=new BitArray(current);
+                Bits = reverse(Bits);
                 BitArray[]data = PermutateData(Bits);
-                BitArray[]Keys=GenKeys();
-                doRounds(data, Keys,EncType.Encyrpt);
+                doRounds(data, keys,EncType.Encyrpt);
                 index += 8;
             }
             return cipherText;
         }
         public string decode()
         {
+            plainText = "";
             int index = 0;
             int len = inputData.Length;
-            plainText = Encoding.ASCII.GetString(inputData);
             BitArray[] keys = GenKeys();
             while (index < len)
             {
                 byte[] current = new byte[8];
                 Array.Copy(inputData, index, current, 0, 8);
                 BitArray Bits = new BitArray(current);
+                Bits = reverse(Bits);
                 BitArray[] data = PermutateData(Bits);
-                BitArray[] Keys = GenKeys();
-                doRounds(data, Keys,EncType.Decrypt);
+                doRounds(data, keys,EncType.Decrypt);
                 index += 8;
             }
             return plainText;
@@ -82,20 +103,25 @@ namespace ComputerSecurity
             BitArray[] R = new BitArray[NumRounds+1];
             if (mode.Equals(EncType.Decrypt))
             {
-                L[16] = data[1];
-                R[16] = data[0];
-                for (int i = 15; i > -1; i--)
+                Keys = Keys.Reverse().ToArray();
+                L[0] = data[0];
+                R[0] = data[1];
+                for (int i = 1; i < NumRounds + 1; i++)
                 {
-                    L[i] = R[i + 1];
-                    BitArray E = Expand(R[i + 1]);
-                    E = E.Xor(Keys[i]);
+                    L[i] = new BitArray(R[i - 1]);
+                    BitArray E = Expand(R[i - 1]);
+                    E = E.Xor(Keys[i - 1]);
                     E = getChoice(E);
                     E = getPerm(E);
-                    R[i] = L[i + 1].Xor(E);
+                    R[i] = L[i - 1].Xor(E);
                 }
-                BitArray Cipher = getInverseP(L[0], R[0]);
+                BitArray Cipher = getInverseP(R[16], L[16]);
+                Cipher = reverse(Cipher);
                 byte[] text = BitArrayToByteArray(Cipher);
-                cipherText += Encoding.ASCII.GetString(text);
+                if (Mode == 1)
+                    plainText += BitConverter.ToString(text);
+                else
+                    plainText += Encoding.ASCII.GetString(text);
             }
             else
             {
@@ -103,21 +129,26 @@ namespace ComputerSecurity
                 R[0] = data[1];
                 for (int i = 1; i < NumRounds + 1; i++)
                 {
-                    L[i] = R[i - 1];
+                    L[i] = new BitArray(R[i - 1]);
                     BitArray E = Expand(R[i - 1]);
                     E = E.Xor(Keys[i - 1]);
                     E = getChoice(E);
                     E = getPerm(E);
                     R[i] = L[i - 1].Xor(E);
                 }
-                BitArray Cipher = getInverseP(L[16], R[16]);
+                BitArray Cipher = getInverseP(R[16], L[16]);
+                Cipher = reverse(Cipher);
                 byte[] text = BitArrayToByteArray(Cipher);
-                plainText += Encoding.ASCII.GetString(text);
+                if (Mode == 1)
+                    cipherText += BitConverter.ToString(text);
+                else
+                    cipherText += Encoding.ASCII.GetString(text);
             }
         }
-        private static byte[] BitArrayToByteArray(BitArray bits)
+        private  byte[] BitArrayToByteArray(BitArray bits)
         {
             byte[] ret = new byte[(bits.Length - 1) / 8 + 1];
+           // bits = reverse(bits);
             bits.CopyTo(ret, 0);
             return ret;
         }
@@ -132,68 +163,68 @@ namespace ComputerSecurity
             res[5]=L[23];
             res[6]=R[31];
             res[7]=L[31];
-            res[8]=L[6];
-            res[9]=R[6];
+            res[8]=R[6];
+            res[9]=L[6];
             //-----------------------------
-            res[10]=L[14];
-            res[11]=R[14];
-            res[12]=L[22];
-            res[13]=R[22];
-            res[14]=L[30];
-            res[15]=R[30];
-            res[16]=L[5];
-            res[17]=R[5];
-            res[18]=L[13];
-            res[19]=R[13];
+            res[10]=R[14];
+            res[11]=L[14];
+            res[12]=R[22];
+            res[13]=L[22];
+            res[14]=R[30];
+            res[15]=L[30];
+            res[16]=R[5];
+            res[17]=L[5];
+            res[18]=R[13];
+            res[19]=L[13];
             //-----------------------------
-            res[20]=L[21];
-            res[21]=R[21];
-            res[22]=L[29];
-            res[23]=R[29];
-            res[24]=L[4];
-            res[25]=R[4];
-            res[26]=L[12];
-            res[27]=R[12];
-            res[28]=L[20];
-            res[29]=R[20];
+            res[20]=R[21];
+            res[21]=L[21];
+            res[22]=R[29];
+            res[23]=L[29];
+            res[24]=R[4];
+            res[25]=L[4];
+            res[26]=R[12];
+            res[27]=L[12];
+            res[28]=R[20];
+            res[29]=L[20];
             //-----------------------------
-            res[30]=L[28];
-            res[31]=R[28];
-            res[32]=L[3];
-            res[33]=R[3];
-            res[34]=L[11];
-            res[35]=R[11];
-            res[36]=L[19];
-            res[37]=R[19];
-            res[38]=L[27];
-            res[39]=R[27];
+            res[30]=R[28];
+            res[31]=L[28];
+            res[32]=R[3];
+            res[33]=L[3];
+            res[34]=R[11];
+            res[35]=L[11];
+            res[36]=R[19];
+            res[37]=L[19];
+            res[38]=R[27];
+            res[39]=L[27];
             //-----------------------------
-            res[40]=L[2];
-            res[41]=R[2];
-            res[42]=L[10];
-            res[43]=R[10];
-            res[44]=L[18];
-            res[45]=R[18];
-            res[46]=L[26];
-            res[47]=R[26];
-            res[48]=L[1];
-            res[49]=R[1];
+            res[40]=R[2];
+            res[41]=L[2];
+            res[42]=R[10];
+            res[43]=L[10];
+            res[44]=R[18];
+            res[45]=L[18];
+            res[46]=R[26];
+            res[47]=L[26];
+            res[48]=R[1];
+            res[49]=L[1];
             //-----------------------------
-            res[50]=L[9];
-            res[51]=R[9];
-            res[52]=L[17];
-            res[53]=R[17];
-            res[54]=L[25];
-            res[55]=R[25];
-            res[56]=L[0];
-            res[57]=R[0];
-            res[58]=L[8];
-            res[59]=R[8];
+            res[50]=R[9];
+            res[51]=L[9];
+            res[52]=R[17];
+            res[53]=L[17];
+            res[54]=R[25];
+            res[55]=L[25];
+            res[56]=R[0];
+            res[57]=L[0];
+            res[58]=R[8];
+            res[59]=L[8];
             //-----------------------------
-            res[60]=L[16];
-            res[61]=R[16];
-            res[62]=L[24];
-            res[63]=R[24];
+            res[60]=R[16];
+            res[61]=L[16];
+            res[62]=R[24];
+            res[63]=L[24];
 
             return res;
         }
@@ -293,7 +324,7 @@ namespace ComputerSecurity
                        };
             BitArray choice;
             BitArray[] Boxes = getBoxes(E);
-            byte[] byteChoice=new byte[32];
+            byte[] byteChoice=new byte[8];
             int[] row=new int[8];
             int[] coloumn=new int[8];
             int count = 0;
@@ -312,17 +343,25 @@ namespace ComputerSecurity
                 if (Boxes[i][4] == true)
                     coloumn[i] += 1;
                 string val = S[i, row[i], coloumn[i]];
-                int hex=int.Parse(val, System.Globalization.NumberStyles.HexNumber);
+                int hex=int.Parse(val);
                 byte[] temp = BitConverter.GetBytes(hex);
-                Array.Copy(temp, 0, byteChoice, count, 4);
+                //if(BitConverter.IsLittleEndian)
+                //    temp = temp.Reverse().ToArray();
+                Array.Copy(temp, 0, byteChoice, i, 1);
                 count += 4;
             }
-            choice = new BitArray(byteChoice);
+            byte[] res = new byte[4];
+            byte t =(byte) (byteChoice[1] >> 4);
+            for(int i=0;i<4;i++)
+                res[i]=(byte)(byteChoice[i*2]<<4|byteChoice[i*2+1]);
+            choice = new BitArray(res);
+            choice = reverse(choice);
             return choice;
         }
 
         private BitArray[] getBoxes(BitArray E)
         {
+            BitArray m = new BitArray(E);
             BitArray[] boxes = new BitArray[8];
             int count=0;
             for(int i=0;i<8;i++)
@@ -330,15 +369,16 @@ namespace ComputerSecurity
                 boxes[i] = new BitArray(6);
                 for(int j=0;j<6;j++)
                 {
-                    boxes[i][j] = E[count];
+                    boxes[i][j] = m[count];
                     count++;
                 }
             }
             return boxes;
         }
 
-        private BitArray Expand(BitArray R)
+        private BitArray Expand(BitArray Re)
         {
+            BitArray R = new BitArray(Re);
             BitArray res = new BitArray(48);
             res[0]=R[31];
             res[1]=R[0];
@@ -395,14 +435,15 @@ namespace ComputerSecurity
             return res;
         }
 
-        private BitArray[] PermutateData(BitArray data)
+        private BitArray[] PermutateData(BitArray dat)
         {
+            BitArray data = new BitArray(dat);
             BitArray[] res = new BitArray[2];
             for (int i = 0; i < 2;i++ )
                 res[i] = new BitArray(32);
 
             res[0][0]=data[57];
-            res[1][1]=data[49];
+            res[0][1]=data[49];
             res[0][2]=data[41];
             res[0][3]=data[33];
             res[0][4]=data[25];
@@ -441,7 +482,7 @@ namespace ComputerSecurity
             res[1][1]=data[48];
             res[1][2]=data[40];
             res[1][3]=data[32];
-            res[1][4]=data[26];
+            res[1][4]=data[24];
             res[1][5]=data[16];
             res[1][6]=data[8];
             res[1][7]=data[0];
@@ -477,10 +518,12 @@ namespace ComputerSecurity
 
         private BitArray[] GenKeys()
         {
+            int[] rotSched = { 1, 1, 2, 2, 2, 2, 2, 2, 1, 2, 2, 2, 2, 2, 2, 1 };
             BitArray[] k = getfirstPermKey();
             BitArray[][] rotKeys = new BitArray[NumRounds][];
             rotKeys[0] = getRotKeys(k, rotSched[0]);
-            for(int i=0;i<NumRounds;i++)
+            
+            for(int i=1;i<NumRounds;i++)
             {
                 rotKeys[i] = getRotKeys(rotKeys[i - 1], rotSched[i]);
             }
@@ -499,7 +542,7 @@ namespace ComputerSecurity
 
         private BitArray getPermChoice2(BitArray[] rotKey)
         {
-            BitArray key = new BitArray(56);
+            BitArray key = new BitArray(48);
             key[0] = rotKey[0][13];
             key[1] = rotKey[0][16];
             key[2] = rotKey[0][10];
@@ -559,25 +602,29 @@ namespace ComputerSecurity
         private BitArray[] getRotKeys(BitArray[] key, int rotations)
         {
             int size=28;
+            BitArray[] res=new BitArray[2];
+            res[0] = new BitArray(key[0]);
+            res[1] = new BitArray(key[1]);
             for(int i=0;i<rotations;i++)
             {
-                bool C1 = key[0][0];
-                bool D1 = key[1][0];
+                bool C1 = res[0][0];
+                bool D1 = res[1][0];
                 for(int j=0;j<size-1;j++)
                 {
-                    key[0][j] = key[0][j + 1];
-                    key[1][j] = key[1][j + 1];
+                    res[0][j] = res[0][j + 1];
+                    res[1][j] = res[1][j + 1];
                 }
-                key[0][size-1]=C1;
-                key[1][size-1]=D1;
+                res[0][size-1]=C1;
+                res[1][size-1]=D1;
             }
-            return key;
+            return res;
         }
 
         private BitArray[] getfirstPermKey()
         {
             BitArray[] keys = new BitArray[2];
             BitArray initKey = new BitArray(keyData);
+            initKey = reverse(initKey);
             keys[0] = new BitArray(28);
             keys[1] = new BitArray(28);
             keys[0].Set(0, initKey.Get(56));
@@ -642,6 +689,22 @@ namespace ComputerSecurity
             keys[1].Set(26, initKey.Get(11));
             keys[1].Set(27, initKey.Get(3));
             return keys;
+        }
+
+        private BitArray reverse(BitArray arr)
+        {
+            int size = arr.Length;
+            BitArray res = new BitArray(size);
+            int numGroups = size / 8;
+            for(int i=0;i<numGroups;i++)
+            {
+                for (int j = 0; j < 8; j++)
+                {
+                    res[(i * 8) + j] = arr[(i * 8) + 7 - j];
+                    res[(i * 8) + 7 - j] = arr[(i * 8) + j];
+                }
+            }
+            return res;
         }
 
     }
