@@ -19,6 +19,7 @@ namespace ComputerSecurity
         
         
         int NumRounds = 16;
+        //mode 0 is text mode 1 is hex (hex is the tested one "el mfrood")
         public Des(string key,string input,int mode)
         {
             this.key = key;
