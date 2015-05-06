@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerSecurity
 {
-    class RailFence
+    public class RailFence
     {
         string inp;
         int n;

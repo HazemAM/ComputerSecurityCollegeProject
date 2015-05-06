@@ -7,7 +7,7 @@ using System.Threading.Tasks;
  namespace ComputerSecurity
 
 {
-    class Colum
+    public class Colum
     {
         int[] n;
         string inp;

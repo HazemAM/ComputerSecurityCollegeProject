@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerSecurity
 {
-    class TripleDes
+    public class TripleDes
     {
         string input;
         string[] keys;

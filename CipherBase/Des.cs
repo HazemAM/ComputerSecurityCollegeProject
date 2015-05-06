@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ComputerSecurity
 {
-    class Des
+    public class Des
     {
         string input;
         string key;

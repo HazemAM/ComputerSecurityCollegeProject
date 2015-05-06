@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerSecurity
 {
-    class HillCipher
+    public class HillCipher
     {
         string input;
         string key;

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ComputerSecurity
 {
-    class MonoAlpha
+    public class MonoAlpha
     {
         string input;
         string key;
