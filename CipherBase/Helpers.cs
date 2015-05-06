@@ -72,6 +72,22 @@ namespace ComputerSecurity
         {
             return (((num & 0x000000ff) << 24) | (num >> 24) | ((num & 0x00ff0000) >> 8) | ((num & 0x0000ff00) << 8));
         }
+
+        public static string removeDashes(string text)
+        {
+            return text.Replace("-", "");
+        }
+
+        public static string[] removeDashes(string[] text)
+        {
+            return Array.ConvertAll(text, removeDashes);
+        }
+
+        public static int[] getIntArray(string text)
+        {
+            return Array.ConvertAll(text.Split(new char[]{' ', ','}), int.Parse);
+        }
+
         public static int calculateEludianMod(int m, int n)
         {
             m = mod(m, n);

@@ -38,7 +38,7 @@ namespace ComputerSecurity
 		private void startServer()
 		{
             Socket serverSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, 1100);
+            IPEndPoint endpoint = new IPEndPoint(IPAddress.Any, 1132);
             
             serverSocket.Bind(endpoint);
             serverSocket.Listen(1);
@@ -88,13 +88,13 @@ namespace ComputerSecurity
             else if(rdioRailFence.Checked)
                 txtCiphertext.Text = new RailFence(plaintext, int.Parse(key)).Encrypt();
             else if(rdioColumnar.Checked)
-                txtCiphertext.Text = new Colum(plaintext, getIntArray(key)).Encrypt();
+                txtCiphertext.Text = new Colum(plaintext, Helpers.getIntArray(key)).Encrypt();
 
             //Third part:
             else if(rdioDES.Checked)
-                txtCiphertext.Text = new Des(removeDashes(key), removeDashes(plaintext), 1).Encode();
+                txtCiphertext.Text = new Des(Helpers.removeDashes(key), Helpers.removeDashes(plaintext), 1).Encode();
             else if(rdioTripleDES.Checked)
-                txtCiphertext.Text = new TripleDes(removeDashes(plaintext), removeDashes(key.Split(' ')), 1).encrypt();
+                txtCiphertext.Text = new TripleDes(Helpers.removeDashes(plaintext), Helpers.removeDashes(key.Split(' ')), 1).encrypt();
 		}
 
 		private void btnDecrypt_Click(object sender, EventArgs e)
@@ -135,13 +135,13 @@ namespace ComputerSecurity
             else if(rdioRailFence.Checked)
                 txtPlaintext.Text = new RailFence(ciphertext, int.Parse(key)).Decrypt();
             else if(rdioColumnar.Checked)
-                txtPlaintext.Text = new Colum(ciphertext, getIntArray(key)).Decrypt();
+                txtPlaintext.Text = new Colum(ciphertext, Helpers.getIntArray(key)).Decrypt();
 
             //Third part:
             else if(rdioDES.Checked)
-                txtPlaintext.Text = new Des(removeDashes(key), removeDashes(ciphertext), 1).decode();
+                txtPlaintext.Text = new Des(Helpers.removeDashes(key), Helpers.removeDashes(ciphertext), 1).decode();
             else if(rdioTripleDES.Checked)
-                txtPlaintext.Text = new TripleDes(removeDashes(ciphertext), removeDashes(key.Split(' ')), 1).decrypt();
+                txtPlaintext.Text = new TripleDes(Helpers.removeDashes(ciphertext), Helpers.removeDashes(key.Split(' ')), 1).decrypt();
 		}
 
 		private bool everythingIsFine()
@@ -173,25 +173,25 @@ namespace ComputerSecurity
 				}
             else if(rdioColumnar.Checked)
                 try{
-                    getIntArray(txtKey.Text);
+                    Helpers.getIntArray(txtKey.Text);
 				} catch{
                     showMessage("Wrong key", "Key must be an array of integers, separated by spaces in Columnar.");
 					return false;
 				}
             else if(rdioDES.Checked){
                 try{
-                    Des.HexToByteArray(removeDashes(txtKey.Text));
+                    Des.HexToByteArray(Helpers.removeDashes(txtKey.Text));
 				} catch{
                     showMessage("Wrong key", "Key must be a valid hex value in DES.");
 					return false;
 				}
                 try{
-                    Des.HexToByteArray(removeDashes(txtPlaintext.Text));
+                    Des.HexToByteArray(Helpers.removeDashes(txtPlaintext.Text));
 				} catch{
                     showMessage("Wrong key", "Plaintext must be a valid hex value in DES.");
 					return false;
 				}
-                if(removeDashes(txtKey.Text).Length != 16){
+                if(Helpers.removeDashes(txtKey.Text).Length != 16){
                     showMessage("Wrong key", "Key must be a hex of exact 16 digit in DES.");
                     return false;
                 }
@@ -205,19 +205,19 @@ namespace ComputerSecurity
                 }
                 try{
                     foreach(string key in keys)
-                        Des.HexToByteArray(removeDashes(key));
+                        Des.HexToByteArray(Helpers.removeDashes(key));
 				} catch{
                     showMessage("Wrong key", "Each key must be a valid hex value in DES.");
 					return false;
 				}
                 try{
-                    Des.HexToByteArray(removeDashes(txtPlaintext.Text));
+                    Des.HexToByteArray(Helpers.removeDashes(txtPlaintext.Text));
 				} catch{
                     showMessage("Wrong key", "Plaintext must be a valid hex value in DES.");
 					return false;
 				}
                 foreach(string key in keys)
-                    if(removeDashes(key).Length != 16){
+                    if(Helpers.removeDashes(key).Length != 16){
                         showMessage("Wrong key", "Each key must be a hex of exact 16 digit in DES.");
                         return false;
                     }
@@ -226,21 +226,6 @@ namespace ComputerSecurity
 
 			return true;
 		}
-
-        private string removeDashes(string text)
-        {
-            return text.Replace("-", "");
-        }
-
-        private string[] removeDashes(string[] text)
-        {
-            return Array.ConvertAll(text, removeDashes);
-        }
-
-        private int[] getIntArray(string text)
-        {
-            return Array.ConvertAll(text.Split(new char[]{' ', ','}), int.Parse);
-        }
 
         private void showMessage(string title, string text){
             MessageBox.Show(this, text, title, MessageBoxButtons.OK, MessageBoxIcon.Information);
