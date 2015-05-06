@@ -36,6 +36,12 @@
             this.rdioRC4 = new System.Windows.Forms.RadioButton();
             this.rdioMD5 = new System.Windows.Forms.RadioButton();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rdioTripleDES = new System.Windows.Forms.RadioButton();
+            this.rdioDES = new System.Windows.Forms.RadioButton();
+            this.rdioMonoalphabetic = new System.Windows.Forms.RadioButton();
+            this.rdioRailFence = new System.Windows.Forms.RadioButton();
+            this.rdioColumnar = new System.Windows.Forms.RadioButton();
+            this.rdioHill = new System.Windows.Forms.RadioButton();
             this.txtPlaintext = new System.Windows.Forms.TextBox();
             this.txtKey = new System.Windows.Forms.TextBox();
             this.btnEncrypt = new System.Windows.Forms.Button();
@@ -46,12 +52,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
-            this.rdioHill = new System.Windows.Forms.RadioButton();
-            this.rdioColumnar = new System.Windows.Forms.RadioButton();
-            this.rdioRailFence = new System.Windows.Forms.RadioButton();
-            this.rdioMonoalphabetic = new System.Windows.Forms.RadioButton();
-            this.rdioDES = new System.Windows.Forms.RadioButton();
-            this.rdioTripleDES = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -138,129 +138,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Algorithm";
             // 
-            // txtPlaintext
+            // rdioTripleDES
             // 
-            this.txtPlaintext.Location = new System.Drawing.Point(18, 178);
-            this.txtPlaintext.Multiline = true;
-            this.txtPlaintext.Name = "txtPlaintext";
-            this.txtPlaintext.Size = new System.Drawing.Size(171, 46);
-            this.txtPlaintext.TabIndex = 8;
-            this.toolTip.SetToolTip(this.txtPlaintext, "Plaintext");
-            // 
-            // txtKey
-            // 
-            this.txtKey.Location = new System.Drawing.Point(144, 155);
-            this.txtKey.Name = "txtKey";
-            this.txtKey.Size = new System.Drawing.Size(171, 20);
-            this.txtKey.TabIndex = 9;
-            this.toolTip.SetToolTip(this.txtKey, "Key");
-            // 
-            // btnEncrypt
-            // 
-            this.btnEncrypt.Location = new System.Drawing.Point(191, 177);
-            this.btnEncrypt.Name = "btnEncrypt";
-            this.btnEncrypt.Size = new System.Drawing.Size(75, 25);
-            this.btnEncrypt.TabIndex = 10;
-            this.btnEncrypt.Text = "Encrypt »";
-            this.btnEncrypt.UseVisualStyleBackColor = true;
-            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
-            // 
-            // txtCiphertext
-            // 
-            this.txtCiphertext.Location = new System.Drawing.Point(268, 178);
-            this.txtCiphertext.Multiline = true;
-            this.txtCiphertext.Name = "txtCiphertext";
-            this.txtCiphertext.Size = new System.Drawing.Size(171, 46);
-            this.txtCiphertext.TabIndex = 11;
-            this.toolTip.SetToolTip(this.txtCiphertext, "Ciphertext");
-            // 
-            // btnDecrypt
-            // 
-            this.btnDecrypt.Location = new System.Drawing.Point(191, 201);
-            this.btnDecrypt.Name = "btnDecrypt";
-            this.btnDecrypt.Size = new System.Drawing.Size(75, 24);
-            this.btnDecrypt.TabIndex = 12;
-            this.btnDecrypt.Text = "« Decrypt";
-            this.btnDecrypt.UseVisualStyleBackColor = true;
-            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
-            // 
-            // btnServerStart
-            // 
-            this.btnServerStart.Location = new System.Drawing.Point(180, 260);
-            this.btnServerStart.Name = "btnServerStart";
-            this.btnServerStart.Size = new System.Drawing.Size(98, 31);
-            this.btnServerStart.TabIndex = 13;
-            this.btnServerStart.Text = "Start server";
-            this.btnServerStart.UseVisualStyleBackColor = true;
-            this.btnServerStart.Click += new System.EventHandler(this.btnServerStart_Click);
-            // 
-            // label1
-            // 
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(55, 243);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(350, 2);
-            this.label1.TabIndex = 20;
-            // 
-            // lblServerStatus
-            // 
-            this.lblServerStatus.Location = new System.Drawing.Point(178, 320);
-            this.lblServerStatus.Name = "lblServerStatus";
-            this.lblServerStatus.Size = new System.Drawing.Size(100, 13);
-            this.lblServerStatus.TabIndex = 21;
-            this.lblServerStatus.Text = "--";
-            this.lblServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnSend
-            // 
-            this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(180, 290);
-            this.btnSend.Name = "btnSend";
-            this.btnSend.Size = new System.Drawing.Size(98, 24);
-            this.btnSend.TabIndex = 22;
-            this.btnSend.Text = "Send";
-            this.btnSend.UseVisualStyleBackColor = true;
-            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
-            // 
-            // rdioHill
-            // 
-            this.rdioHill.AutoSize = true;
-            this.rdioHill.Location = new System.Drawing.Point(130, 46);
-            this.rdioHill.Name = "rdioHill";
-            this.rdioHill.Size = new System.Drawing.Size(72, 17);
-            this.rdioHill.TabIndex = 1;
-            this.rdioHill.Text = "Hill Cipher";
-            this.rdioHill.UseVisualStyleBackColor = true;
-            // 
-            // rdioColumnar
-            // 
-            this.rdioColumnar.AutoSize = true;
-            this.rdioColumnar.Location = new System.Drawing.Point(362, 46);
-            this.rdioColumnar.Name = "rdioColumnar";
-            this.rdioColumnar.Size = new System.Drawing.Size(69, 17);
-            this.rdioColumnar.TabIndex = 3;
-            this.rdioColumnar.Text = "Columnar";
-            this.rdioColumnar.UseVisualStyleBackColor = true;
-            // 
-            // rdioRailFence
-            // 
-            this.rdioRailFence.AutoSize = true;
-            this.rdioRailFence.Location = new System.Drawing.Point(226, 46);
-            this.rdioRailFence.Name = "rdioRailFence";
-            this.rdioRailFence.Size = new System.Drawing.Size(73, 17);
-            this.rdioRailFence.TabIndex = 2;
-            this.rdioRailFence.Text = "Rail fence";
-            this.rdioRailFence.UseVisualStyleBackColor = true;
-            // 
-            // rdioMonoalphabetic
-            // 
-            this.rdioMonoalphabetic.AutoSize = true;
-            this.rdioMonoalphabetic.Location = new System.Drawing.Point(10, 46);
-            this.rdioMonoalphabetic.Name = "rdioMonoalphabetic";
-            this.rdioMonoalphabetic.Size = new System.Drawing.Size(101, 17);
-            this.rdioMonoalphabetic.TabIndex = 6;
-            this.rdioMonoalphabetic.Text = "Monoalphabetic";
-            this.rdioMonoalphabetic.UseVisualStyleBackColor = true;
+            this.rdioTripleDES.AutoSize = true;
+            this.rdioTripleDES.Location = new System.Drawing.Point(130, 69);
+            this.rdioTripleDES.Name = "rdioTripleDES";
+            this.rdioTripleDES.Size = new System.Drawing.Size(76, 17);
+            this.rdioTripleDES.TabIndex = 8;
+            this.rdioTripleDES.Text = "Triple-DES";
+            this.rdioTripleDES.UseVisualStyleBackColor = true;
             // 
             // rdioDES
             // 
@@ -272,15 +158,129 @@
             this.rdioDES.Text = "DES";
             this.rdioDES.UseVisualStyleBackColor = true;
             // 
-            // rdioTripleDES
+            // rdioMonoalphabetic
             // 
-            this.rdioTripleDES.AutoSize = true;
-            this.rdioTripleDES.Location = new System.Drawing.Point(130, 69);
-            this.rdioTripleDES.Name = "rdioTripleDES";
-            this.rdioTripleDES.Size = new System.Drawing.Size(76, 17);
-            this.rdioTripleDES.TabIndex = 8;
-            this.rdioTripleDES.Text = "Triple-DES";
-            this.rdioTripleDES.UseVisualStyleBackColor = true;
+            this.rdioMonoalphabetic.AutoSize = true;
+            this.rdioMonoalphabetic.Location = new System.Drawing.Point(10, 46);
+            this.rdioMonoalphabetic.Name = "rdioMonoalphabetic";
+            this.rdioMonoalphabetic.Size = new System.Drawing.Size(101, 17);
+            this.rdioMonoalphabetic.TabIndex = 6;
+            this.rdioMonoalphabetic.Text = "Monoalphabetic";
+            this.rdioMonoalphabetic.UseVisualStyleBackColor = true;
+            // 
+            // rdioRailFence
+            // 
+            this.rdioRailFence.AutoSize = true;
+            this.rdioRailFence.Location = new System.Drawing.Point(226, 46);
+            this.rdioRailFence.Name = "rdioRailFence";
+            this.rdioRailFence.Size = new System.Drawing.Size(73, 17);
+            this.rdioRailFence.TabIndex = 2;
+            this.rdioRailFence.Text = "Rail fence";
+            this.rdioRailFence.UseVisualStyleBackColor = true;
+            // 
+            // rdioColumnar
+            // 
+            this.rdioColumnar.AutoSize = true;
+            this.rdioColumnar.Location = new System.Drawing.Point(362, 46);
+            this.rdioColumnar.Name = "rdioColumnar";
+            this.rdioColumnar.Size = new System.Drawing.Size(69, 17);
+            this.rdioColumnar.TabIndex = 3;
+            this.rdioColumnar.Text = "Columnar";
+            this.rdioColumnar.UseVisualStyleBackColor = true;
+            // 
+            // rdioHill
+            // 
+            this.rdioHill.AutoSize = true;
+            this.rdioHill.Location = new System.Drawing.Point(130, 46);
+            this.rdioHill.Name = "rdioHill";
+            this.rdioHill.Size = new System.Drawing.Size(72, 17);
+            this.rdioHill.TabIndex = 1;
+            this.rdioHill.Text = "Hill Cipher";
+            this.rdioHill.UseVisualStyleBackColor = true;
+            // 
+            // txtPlaintext
+            // 
+            this.txtPlaintext.Location = new System.Drawing.Point(39, 180);
+            this.txtPlaintext.Multiline = true;
+            this.txtPlaintext.Name = "txtPlaintext";
+            this.txtPlaintext.Size = new System.Drawing.Size(171, 46);
+            this.txtPlaintext.TabIndex = 8;
+            this.toolTip.SetToolTip(this.txtPlaintext, "Plaintext");
+            // 
+            // txtKey
+            // 
+            this.txtKey.Location = new System.Drawing.Point(165, 157);
+            this.txtKey.Name = "txtKey";
+            this.txtKey.Size = new System.Drawing.Size(171, 20);
+            this.txtKey.TabIndex = 9;
+            this.toolTip.SetToolTip(this.txtKey, "Key");
+            // 
+            // btnEncrypt
+            // 
+            this.btnEncrypt.Location = new System.Drawing.Point(212, 179);
+            this.btnEncrypt.Name = "btnEncrypt";
+            this.btnEncrypt.Size = new System.Drawing.Size(75, 25);
+            this.btnEncrypt.TabIndex = 10;
+            this.btnEncrypt.Text = "Encrypt »";
+            this.btnEncrypt.UseVisualStyleBackColor = true;
+            this.btnEncrypt.Click += new System.EventHandler(this.btnEncrypt_Click);
+            // 
+            // txtCiphertext
+            // 
+            this.txtCiphertext.Location = new System.Drawing.Point(289, 180);
+            this.txtCiphertext.Multiline = true;
+            this.txtCiphertext.Name = "txtCiphertext";
+            this.txtCiphertext.Size = new System.Drawing.Size(171, 46);
+            this.txtCiphertext.TabIndex = 11;
+            this.toolTip.SetToolTip(this.txtCiphertext, "Ciphertext");
+            // 
+            // btnDecrypt
+            // 
+            this.btnDecrypt.Location = new System.Drawing.Point(212, 203);
+            this.btnDecrypt.Name = "btnDecrypt";
+            this.btnDecrypt.Size = new System.Drawing.Size(75, 24);
+            this.btnDecrypt.TabIndex = 12;
+            this.btnDecrypt.Text = "« Decrypt";
+            this.btnDecrypt.UseVisualStyleBackColor = true;
+            this.btnDecrypt.Click += new System.EventHandler(this.btnDecrypt_Click);
+            // 
+            // btnServerStart
+            // 
+            this.btnServerStart.Location = new System.Drawing.Point(201, 262);
+            this.btnServerStart.Name = "btnServerStart";
+            this.btnServerStart.Size = new System.Drawing.Size(98, 31);
+            this.btnServerStart.TabIndex = 13;
+            this.btnServerStart.Text = "Start server";
+            this.btnServerStart.UseVisualStyleBackColor = true;
+            this.btnServerStart.Click += new System.EventHandler(this.btnServerStart_Click);
+            // 
+            // label1
+            // 
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.label1.Location = new System.Drawing.Point(76, 245);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(350, 2);
+            this.label1.TabIndex = 20;
+            // 
+            // lblServerStatus
+            // 
+            this.lblServerStatus.Location = new System.Drawing.Point(199, 322);
+            this.lblServerStatus.Name = "lblServerStatus";
+            this.lblServerStatus.Size = new System.Drawing.Size(100, 13);
+            this.lblServerStatus.TabIndex = 21;
+            this.lblServerStatus.Text = "--";
+            this.lblServerStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnSend
+            // 
+            this.btnSend.Enabled = false;
+            this.btnSend.Location = new System.Drawing.Point(201, 292);
+            this.btnSend.Name = "btnSend";
+            this.btnSend.Size = new System.Drawing.Size(98, 24);
+            this.btnSend.TabIndex = 22;
+            this.btnSend.Text = "Send";
+            this.btnSend.UseVisualStyleBackColor = true;
+            this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
             // MainWindow
             // 
@@ -297,6 +297,8 @@
             this.Controls.Add(this.txtKey);
             this.Controls.Add(this.txtPlaintext);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Server";
             this.groupBox1.ResumeLayout(false);
