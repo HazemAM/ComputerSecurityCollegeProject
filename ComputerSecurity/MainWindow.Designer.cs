@@ -46,6 +46,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblServerStatus = new System.Windows.Forms.Label();
             this.btnSend = new System.Windows.Forms.Button();
+            this.rdioHill = new System.Windows.Forms.RadioButton();
+            this.rdioColumnar = new System.Windows.Forms.RadioButton();
+            this.rdioRailFence = new System.Windows.Forms.RadioButton();
+            this.rdioMonoalphabetic = new System.Windows.Forms.RadioButton();
+            this.rdioDES = new System.Windows.Forms.RadioButton();
+            this.rdioTripleDES = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,7 +70,7 @@
             // rdioPlayfair
             // 
             this.rdioPlayfair.AutoSize = true;
-            this.rdioPlayfair.Location = new System.Drawing.Point(98, 23);
+            this.rdioPlayfair.Location = new System.Drawing.Point(130, 23);
             this.rdioPlayfair.Name = "rdioPlayfair";
             this.rdioPlayfair.Size = new System.Drawing.Size(59, 17);
             this.rdioPlayfair.TabIndex = 1;
@@ -74,7 +80,7 @@
             // rdioVigenereRe
             // 
             this.rdioVigenereRe.AutoSize = true;
-            this.rdioVigenereRe.Location = new System.Drawing.Point(187, 23);
+            this.rdioVigenereRe.Location = new System.Drawing.Point(226, 23);
             this.rdioVigenereRe.Name = "rdioVigenereRe";
             this.rdioVigenereRe.Size = new System.Drawing.Size(108, 17);
             this.rdioVigenereRe.TabIndex = 2;
@@ -84,7 +90,7 @@
             // rdioVigenereAuto
             // 
             this.rdioVigenereAuto.AutoSize = true;
-            this.rdioVigenereAuto.Location = new System.Drawing.Point(325, 23);
+            this.rdioVigenereAuto.Location = new System.Drawing.Point(362, 23);
             this.rdioVigenereAuto.Name = "rdioVigenereAuto";
             this.rdioVigenereAuto.Size = new System.Drawing.Size(95, 17);
             this.rdioVigenereAuto.TabIndex = 3;
@@ -94,7 +100,7 @@
             // rdioRC4
             // 
             this.rdioRC4.AutoSize = true;
-            this.rdioRC4.Location = new System.Drawing.Point(10, 46);
+            this.rdioRC4.Location = new System.Drawing.Point(10, 92);
             this.rdioRC4.Name = "rdioRC4";
             this.rdioRC4.Size = new System.Drawing.Size(46, 17);
             this.rdioRC4.TabIndex = 4;
@@ -104,7 +110,7 @@
             // rdioMD5
             // 
             this.rdioMD5.AutoSize = true;
-            this.rdioMD5.Location = new System.Drawing.Point(98, 46);
+            this.rdioMD5.Location = new System.Drawing.Point(130, 92);
             this.rdioMD5.Name = "rdioMD5";
             this.rdioMD5.Size = new System.Drawing.Size(48, 17);
             this.rdioMD5.TabIndex = 5;
@@ -113,22 +119,28 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.rdioTripleDES);
+            this.groupBox1.Controls.Add(this.rdioDES);
+            this.groupBox1.Controls.Add(this.rdioMonoalphabetic);
             this.groupBox1.Controls.Add(this.rdioMD5);
             this.groupBox1.Controls.Add(this.rdioRC4);
             this.groupBox1.Controls.Add(this.rdioCeasar);
+            this.groupBox1.Controls.Add(this.rdioRailFence);
+            this.groupBox1.Controls.Add(this.rdioColumnar);
             this.groupBox1.Controls.Add(this.rdioVigenereRe);
+            this.groupBox1.Controls.Add(this.rdioHill);
             this.groupBox1.Controls.Add(this.rdioVigenereAuto);
             this.groupBox1.Controls.Add(this.rdioPlayfair);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(434, 76);
+            this.groupBox1.Size = new System.Drawing.Size(474, 124);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Encryption Algorithm";
+            this.groupBox1.Text = "Algorithm";
             // 
             // txtPlaintext
             // 
-            this.txtPlaintext.Location = new System.Drawing.Point(18, 129);
+            this.txtPlaintext.Location = new System.Drawing.Point(18, 178);
             this.txtPlaintext.Multiline = true;
             this.txtPlaintext.Name = "txtPlaintext";
             this.txtPlaintext.Size = new System.Drawing.Size(171, 46);
@@ -137,7 +149,7 @@
             // 
             // txtKey
             // 
-            this.txtKey.Location = new System.Drawing.Point(144, 106);
+            this.txtKey.Location = new System.Drawing.Point(144, 155);
             this.txtKey.Name = "txtKey";
             this.txtKey.Size = new System.Drawing.Size(171, 20);
             this.txtKey.TabIndex = 9;
@@ -145,7 +157,7 @@
             // 
             // btnEncrypt
             // 
-            this.btnEncrypt.Location = new System.Drawing.Point(191, 128);
+            this.btnEncrypt.Location = new System.Drawing.Point(191, 177);
             this.btnEncrypt.Name = "btnEncrypt";
             this.btnEncrypt.Size = new System.Drawing.Size(75, 25);
             this.btnEncrypt.TabIndex = 10;
@@ -155,7 +167,7 @@
             // 
             // txtCiphertext
             // 
-            this.txtCiphertext.Location = new System.Drawing.Point(268, 129);
+            this.txtCiphertext.Location = new System.Drawing.Point(268, 178);
             this.txtCiphertext.Multiline = true;
             this.txtCiphertext.Name = "txtCiphertext";
             this.txtCiphertext.Size = new System.Drawing.Size(171, 46);
@@ -164,7 +176,7 @@
             // 
             // btnDecrypt
             // 
-            this.btnDecrypt.Location = new System.Drawing.Point(191, 152);
+            this.btnDecrypt.Location = new System.Drawing.Point(191, 201);
             this.btnDecrypt.Name = "btnDecrypt";
             this.btnDecrypt.Size = new System.Drawing.Size(75, 24);
             this.btnDecrypt.TabIndex = 12;
@@ -174,7 +186,7 @@
             // 
             // btnServerStart
             // 
-            this.btnServerStart.Location = new System.Drawing.Point(180, 211);
+            this.btnServerStart.Location = new System.Drawing.Point(180, 260);
             this.btnServerStart.Name = "btnServerStart";
             this.btnServerStart.Size = new System.Drawing.Size(98, 31);
             this.btnServerStart.TabIndex = 13;
@@ -185,14 +197,14 @@
             // label1
             // 
             this.label1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.label1.Location = new System.Drawing.Point(55, 194);
+            this.label1.Location = new System.Drawing.Point(55, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(350, 2);
             this.label1.TabIndex = 20;
             // 
             // lblServerStatus
             // 
-            this.lblServerStatus.Location = new System.Drawing.Point(178, 271);
+            this.lblServerStatus.Location = new System.Drawing.Point(178, 320);
             this.lblServerStatus.Name = "lblServerStatus";
             this.lblServerStatus.Size = new System.Drawing.Size(100, 13);
             this.lblServerStatus.TabIndex = 21;
@@ -202,7 +214,7 @@
             // btnSend
             // 
             this.btnSend.Enabled = false;
-            this.btnSend.Location = new System.Drawing.Point(180, 241);
+            this.btnSend.Location = new System.Drawing.Point(180, 290);
             this.btnSend.Name = "btnSend";
             this.btnSend.Size = new System.Drawing.Size(98, 24);
             this.btnSend.TabIndex = 22;
@@ -210,11 +222,71 @@
             this.btnSend.UseVisualStyleBackColor = true;
             this.btnSend.Click += new System.EventHandler(this.btnSend_Click);
             // 
+            // rdioHill
+            // 
+            this.rdioHill.AutoSize = true;
+            this.rdioHill.Location = new System.Drawing.Point(130, 46);
+            this.rdioHill.Name = "rdioHill";
+            this.rdioHill.Size = new System.Drawing.Size(72, 17);
+            this.rdioHill.TabIndex = 1;
+            this.rdioHill.Text = "Hill Cipher";
+            this.rdioHill.UseVisualStyleBackColor = true;
+            // 
+            // rdioColumnar
+            // 
+            this.rdioColumnar.AutoSize = true;
+            this.rdioColumnar.Location = new System.Drawing.Point(362, 46);
+            this.rdioColumnar.Name = "rdioColumnar";
+            this.rdioColumnar.Size = new System.Drawing.Size(69, 17);
+            this.rdioColumnar.TabIndex = 3;
+            this.rdioColumnar.Text = "Columnar";
+            this.rdioColumnar.UseVisualStyleBackColor = true;
+            // 
+            // rdioRailFence
+            // 
+            this.rdioRailFence.AutoSize = true;
+            this.rdioRailFence.Location = new System.Drawing.Point(226, 46);
+            this.rdioRailFence.Name = "rdioRailFence";
+            this.rdioRailFence.Size = new System.Drawing.Size(73, 17);
+            this.rdioRailFence.TabIndex = 2;
+            this.rdioRailFence.Text = "Rail fence";
+            this.rdioRailFence.UseVisualStyleBackColor = true;
+            // 
+            // rdioMonoalphabetic
+            // 
+            this.rdioMonoalphabetic.AutoSize = true;
+            this.rdioMonoalphabetic.Location = new System.Drawing.Point(10, 46);
+            this.rdioMonoalphabetic.Name = "rdioMonoalphabetic";
+            this.rdioMonoalphabetic.Size = new System.Drawing.Size(101, 17);
+            this.rdioMonoalphabetic.TabIndex = 6;
+            this.rdioMonoalphabetic.Text = "Monoalphabetic";
+            this.rdioMonoalphabetic.UseVisualStyleBackColor = true;
+            // 
+            // rdioDES
+            // 
+            this.rdioDES.AutoSize = true;
+            this.rdioDES.Location = new System.Drawing.Point(10, 69);
+            this.rdioDES.Name = "rdioDES";
+            this.rdioDES.Size = new System.Drawing.Size(47, 17);
+            this.rdioDES.TabIndex = 7;
+            this.rdioDES.Text = "DES";
+            this.rdioDES.UseVisualStyleBackColor = true;
+            // 
+            // rdioTripleDES
+            // 
+            this.rdioTripleDES.AutoSize = true;
+            this.rdioTripleDES.Location = new System.Drawing.Point(130, 69);
+            this.rdioTripleDES.Name = "rdioTripleDES";
+            this.rdioTripleDES.Size = new System.Drawing.Size(76, 17);
+            this.rdioTripleDES.TabIndex = 8;
+            this.rdioTripleDES.Text = "Triple-DES";
+            this.rdioTripleDES.UseVisualStyleBackColor = true;
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 293);
+            this.ClientSize = new System.Drawing.Size(498, 350);
             this.Controls.Add(this.btnSend);
             this.Controls.Add(this.lblServerStatus);
             this.Controls.Add(this.label1);
@@ -253,6 +325,12 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblServerStatus;
         private System.Windows.Forms.Button btnSend;
+        private System.Windows.Forms.RadioButton rdioTripleDES;
+        private System.Windows.Forms.RadioButton rdioDES;
+        private System.Windows.Forms.RadioButton rdioMonoalphabetic;
+        private System.Windows.Forms.RadioButton rdioRailFence;
+        private System.Windows.Forms.RadioButton rdioColumnar;
+        private System.Windows.Forms.RadioButton rdioHill;
 	}
 }
 
