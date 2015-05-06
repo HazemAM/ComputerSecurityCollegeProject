@@ -85,10 +85,10 @@ namespace ComputerSecurity
         {
             int[,] res= new int [2,2];
             int det = Key[0, 0] * Key[1, 1] - Key[0, 1] * Key[1, 0];
-
-            det = Helpers.calculateEludianMod(det, 26);
             if (det == 0)
                 throw new Exception("the key matrix det = 0");
+            det = Helpers.calculateEludianMod(det, 26);
+            
             //calculating inverse mat
             res[0,0]=Key[1,1];
             res[0,1]=Helpers.mod(-1*Key[0,1],26);
